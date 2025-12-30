@@ -388,9 +388,7 @@ const productRows = props.products
               </div>
           </div>
           <div class="footer">
- <p style="font-weight:bold; font-style:italic; padding:4px 0; font-size:14px; color:#000;">
-  මාරු කිරීම සඳහා දින 07 ඇතුලත බිල්පත සමග පැමිණෙන්න.
-</p>
+            <p>No Exchange On Purchased Items</p>
               <p>THANK YOU COME AGAIN</p>
               <p class="italic">Let the quality define its own standards</p>
                <p style="font-weight: bold;">Powered by JAAN Network Ltd.</p>
