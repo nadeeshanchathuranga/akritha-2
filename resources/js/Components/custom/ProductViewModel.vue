@@ -232,6 +232,8 @@ const formattedDate = computed(() =>
 
 
 
+
+
 function generateAndPrintBarcodes() {
   const barcode = selectedProduct?.barcode;
   const count = parseInt(barcodeCount.value, 10);
@@ -401,4 +403,19 @@ function generateAndPrintBarcodes() {
     }, 400);
   };
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
