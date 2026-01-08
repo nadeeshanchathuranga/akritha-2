@@ -245,18 +245,19 @@ function generateAndPrintBarcodes() {
 
   // Sizing constants (mm/px)
   const MM_TO_PX = 3.78;
-  const LABEL_W_MM = 30;
-  const LABEL_H_MM = 18;
+  const LABEL_W_MM = 30; // Adjusted for 3 labels per row
+  const LABEL_H_MM = 20; // Adjusted height for Zebra ZD230
   const INNER_PADDING_MM = 0.5;
-  const GUTTER_MM = 0; // Removed gap - configured in printer
-  const BARCODE_H_MM = 8; // Reduced from 12
-  const NAME_FZ_PX = 9;
-  const PRICE_FZ_PX = 16; // Increased for better visibility
+  const GUTTER_MM = 0;
+  const BARCODE_H_MM = 7; // Slightly reduced for better fit
+  const NAME_FZ_PX = 8; // Reduced font size
+  const PRICE_FZ_PX = 14;
 
   // Build labels HTML
   const labelsHtml = Array.from({ length: count }).map((_, idx) => `
     <div class="barcode-label">
-      <div class="product-name">${selectedProduct?.code || 'N/A'}</div>
+      <div class="product-name">${selectedProduct?.name || 'N/A'}</div>
+      <div class="product-name">${selectedProduct?.barcode || 'N/A'}</div>
       <div class="barcode-svg"><svg id="barcode${idx + 1}"></svg></div>
       <div class="bottom-info">${(selectedProduct?.selling_price ?? 'N/A')} LKR</div>
     </div>
@@ -268,13 +269,12 @@ function generateAndPrintBarcodes() {
       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
       <style>
         * { margin:0; padding:0; box-sizing:border-box; }
-        html, body { background:white; margin:0; padding:0; padding-top: 3mm; }
+        html, body { background:white; margin:0; padding:0; padding-top: 2mm; }
         body { font-family:"Poppins", sans-serif; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
 
         .barcode-container {
           width: 100%;
           margin: 0;
-          margin-top: 2mm;
           padding: 0;
           display: flex;
           flex-wrap: wrap;
@@ -284,7 +284,8 @@ function generateAndPrintBarcodes() {
         }
 
         .barcode-label {
-          width: ${LABEL_W_MM}mm;
+          /* Three per row */
+          width: calc(33.33% - 0.5mm);
           height: ${LABEL_H_MM}mm;
           background: white;
           padding: ${INNER_PADDING_MM}mm;
@@ -294,6 +295,7 @@ function generateAndPrintBarcodes() {
           justify-content: center;
           overflow: hidden;
           margin: 0;
+          box-sizing: border-box;
         }
 
         .product-name {
@@ -341,9 +343,9 @@ function generateAndPrintBarcodes() {
             margin: 0;
             padding: 0;
           }
-          html, body { 
-            margin: 0; 
-            padding: 0; 
+          html, body {
+            margin: 0;
+            padding: 0;
           }
           .barcode-container {
             margin: 0;
