@@ -247,12 +247,12 @@ function generateAndPrintBarcodes() {
     return;
   }
 
-  // Sizing constants (mm/px)
+  // Zebra ZD230 - Label size: 30mm x 20mm, 3 labels per row
   const MM_TO_PX = 3.78;
   const LABEL_W_MM = 30;
   const LABEL_H_MM = 20;
   const INNER_PADDING_MM = 0.5;
-  const GUTTER_MM = 1; // Increased gap between labels
+  const GUTTER_MM = 0;
   const BARCODE_H_MM = 7;
   const NAME_FZ_PX = 8;
   const PRICE_FZ_PX = 14;
@@ -273,16 +273,8 @@ function generateAndPrintBarcodes() {
       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
       <style>
         * { margin:0; padding:0; box-sizing:border-box; }
-        html, body {
-          background:white;
-          margin:0;
-          padding:3mm; /* Added padding to prevent cutoff */
-        }
-        body {
-          font-family:"Poppins", sans-serif;
-          -webkit-print-color-adjust:exact;
-          print-color-adjust:exact;
-        }
+        html, body { background:white; margin:0; padding:0; padding-top: 2mm; }
+        body { font-family:"Poppins", sans-serif; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
 
         .barcode-container {
           width: 100%;
@@ -296,8 +288,8 @@ function generateAndPrintBarcodes() {
         }
 
         .barcode-label {
-          /* Three per row - Fixed calculation */
-          width: calc((100% - ${GUTTER_MM * 2}mm) / 3);
+          /* Three per row - Zebra ZD230: 30mm x 20mm labels */
+          width: calc(33.33% - 0.5mm);
           height: ${LABEL_H_MM}mm;
           background: white;
           padding: ${INNER_PADDING_MM}mm;
@@ -308,7 +300,6 @@ function generateAndPrintBarcodes() {
           overflow: hidden;
           margin: 0;
           box-sizing: border-box;
-          page-break-inside: avoid; /* Prevent breaking labels */
         }
 
         .product-name {
@@ -353,19 +344,16 @@ function generateAndPrintBarcodes() {
 
         @media print {
           @page {
-            margin: 3mm; /* Printer margin */
-            size: auto;
+            margin: 0;
+            padding: 0;
           }
           html, body {
             margin: 0;
-            padding: 3mm;
+            padding: 0;
           }
           .barcode-container {
             margin: 0;
             padding: 0;
-          }
-          .barcode-label {
-            page-break-inside: avoid;
           }
         }
       </style>
