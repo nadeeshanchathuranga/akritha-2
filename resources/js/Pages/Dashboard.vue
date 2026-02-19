@@ -7,6 +7,40 @@
     <Header />
 
     <div class="grid w-full h-full md:grid-cols-4 grid-cols-1 gap-8 auto-rows-fr">
+       <Link href="/sales-reports" v-if="HasRole(['Admin'])" class="block md:hidden">
+        <div class="dashboard-card bg-[#FF8000]">
+          <div class="card-content">
+            <div class="icon-container">
+              <img
+                src="/images/dashboard/report.png"
+                class="icon"
+                alt="dresshub.lk"
+              />
+            </div>
+            <div class="text-container">
+              <p class="title">Sales Report</p>
+            </div>
+          </div>
+        </div>
+      </Link>
+
+      <Link href="/bill-view" v-if="HasRole(['Admin'])" class="block md:hidden">
+        <div class="dashboard-card bg-[#009990]">
+          <div class="card-content">
+            <div class="icon-container">
+              <img
+                src="/images/dashboard/checkout.png"
+                class="icon"
+                alt="dresshub.lk"
+              />
+            </div>
+            <div class="text-container">
+              <p class="title">Bill View</p>
+            </div>
+          </div>
+        </div>
+      </Link>
+
       <Link href="/pos" v-if="HasRole(['Admin', 'Cashier'])">
         <div class="dashboard-card bg-[#4d7c0f]">
           <div class="card-content">
@@ -350,8 +384,6 @@
           </div>
         </div>
       </Link>
-
-
 
     </div>
   </div>
